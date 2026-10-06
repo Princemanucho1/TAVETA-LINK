@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taveta Connect | Services, Fundis & Boda</title>
+<meta name="description" content="Taveta Connect — Find businesses, fundis, boda riders, hotels, salons and every service in Taveta Constituency. One tap to call or WhatsApp.">
+<meta name="theme-color" content="#0f766e">
+<style>
+:root{
+--primary:#0f766e;
+--primary-dark:#115e59;
+--primary-light:#14b8a6;
+--accent:#f59e0b;
+--green:#22c55e;
+--wa:#25d366;
+--dark:#0f172a;
+--text:#1e293b;
+--muted:#64748b;
+--bg:#f8fafc;
+--card:#ffffff;
+--border:#e2e8f0;
+--shadow:0 4px 20px rgba(15,23,42,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* ===== HEADER ===== */
+header{
+background:linear-gradient(135deg,#0f766e 0%,#115e59 50%,#134e4a 100%);
+color:#fff;padding:24px 18px 22px;position:relative;overflow:hidden;
+}
+header::before{
+content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;
+background:radial-gradient(circle,rgba(34,197,94,.25),transparent 70%);border-radius:50%;
+}
+header::after{
+content:'';position:absolute;bottom:-80px;left:-40px;width:180px;height:180px;
+background:radial-gradient(circle,rgba(245,158,11,.18),transparent 70%);border-radius:50%;
+}
+.header-inner{position:relative;z-index:2;max-width:600px;margin:0 auto;text-align:center}
+.logo{
+width:64px;height:64px;margin:0 auto 10px;
+background:linear-gradient(135deg,#22c55e,#14b8a6);
+border-radius:18px;display:flex;align-items:center;justify-content:center;
+box-shadow:0 8px 24px rgba(34,197,94,.35);font-size:32px;
+}
+header h1{font-size:1.55em;font-weight:800;letter-spacing:-.5px}
+header p{font-size:.88em;opacity:.92;margin-top:4px}
+.badge-live{
+display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+background:rgba(255,255,255,.15);padding:5px 12px;border-radius:20px;
+font-size:.72em;font-weight:600;backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.2);
+}
+.dot-live{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== SEARCH ===== */
+.search-wrap{max-width:600px;margin:16px auto 0;padding:0 18px}
+.search-box{
+display:flex;background:#fff;border-radius:14px;overflow:hidden;
+box-shadow:0 6px 24px rgba(0,0,0,.12);
+}
+.search-box input{
+flex:1;border:none;padding:14px 18px;font-size:.95em;outline:none;color:var(--text);
+}
+.search-box input::placeholder{color:#94a3b8}
+.search-box button{
+background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none;
+padding:0 22px;font-size:1.15em;cursor:pointer;
+}
+
+/* ===== TABS ===== */
+.tabs{
+display:flex;gap:8px;padding:14px 18px;overflow-x:auto;
+scrollbar-width:none;position:sticky;top:0;z-index:99;
+background:rgba(248,250,252,.92);backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+flex-shrink:0;padding:8px 16px;background:#fff;border:1px solid var(--border);
+border-radius:24px;font-size:.82em;font-weight:600;color:var(--text);
+cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.tab.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 4px 12px rgba(15,118,110,.3)}
+.tab:active{transform:scale(.96)}
+
+/* ===== CONTAINER ===== */
+.container{max-width:600px;margin:0 auto;padding:16px 18px 100px}
+
+/* ===== STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 20px}
+.stat{
+background:var(--card);padding:16px 8px;border-radius:14px;text-align:center;
+box-shadow:var(--shadow);border:1px solid var(--border);
+}
+.stat .num{
+font-size:1.35em;font-weight:800;
+background:linear-gradient(135deg,var(--primary),var(--primary-light));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat .label{font-size:.68em;color:var(--muted);font-weight:600;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+
+/* ===== SECTION TITLE ===== */
+.section-title{
+font-size:1.05em;font-weight:800;color:var(--dark);
+margin:24px 0 12px;display:flex;align-items:center;gap:8px;
+}
+.section-title .bar{
+width:4px;height:20px;background:linear-gradient(180deg,var(--primary),var(--primary-light));
+border-radius:2px;
+}
+
+/* ===== CARDS ===== */
+.card{
+background:var(--card);padding:16px;border-radius:16px;margin-bottom:12px;
+box-shadow:var(--shadow);border:1px solid var(--border);
+display:flex;gap:14px;transition:transform .15s,box-shadow .15s;
+}
+.card:active{transform:scale(.985);box-shadow:0 2px 10px rgba(15,23,42,.1)}
+.avatar{
+width:56px;height:56px;border-radius:14px;flex-shrink:0;
+display:flex;align-items:center;justify-content:center;font-size:1.7em;
+background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border:1px solid #99f6e4;
+}
+.card-body{flex:1;min-width:0}
+.card-body h3{font-size:1em;font-weight:700;color:var(--dark);margin-bottom:3px}
+.loc{font-size:.78em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.meta{font-size:.78em;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.rating{color:var(--accent);font-weight:700}
+.status{
+display:inline-block;padding:3px 9px;border-radius:20px;
+font-size:.72em;font-weight:700;
+}
+.status.open{background:#dcfce7;color:#166534}
+.status.closed{background:#fee2e2;color:#991b1b}
+.tag{
+display:inline-block;padding:3px 9px;background:#e0f2fe;color:#0369a1;
+border-radius:20px;font-size:.7em;font-weight:700;
+}
+.btns{display:flex;gap:8px;margin-top:8px}
+.btn-sm{
+flex:1;text-align:center;padding:9px;border-radius:10px;
+font-size:.8em;font-weight:700;text-decoration:none;color:#fff;
+transition:transform .15s;
+}
+.btn-sm:active{transform:scale(.95)}
+.btn-call{background:linear-gradient(135deg,var(--primary),var(--primary-dark))}
+.btn-wa{background:linear-gradient(135deg,#25d366,#16a34a)}
+
+/* ===== BODA CARD ===== */
+.boda-card{
+background:var(--card);border-radius:16px;overflow:hidden;
+box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:12px;
+}
+.boda-img{
+height:110px;position:relative;
+background:linear-gradient(135deg,#0f766e,#0891b2);
+display:flex;align-items:center;justify-content:center;font-size:3em;color:#fff;
+}
+.boda-img::before{
+content:'';position:absolute;inset:0;
+background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.15),transparent 60%);
+}
+.boda-info{padding:14px 16px}
+.boda-info h3{font-size:.98em;font-weight:700;color:var(--dark)}
+.boda-info .stage{font-size:.8em;color:var(--primary);font-weight:700;margin:3px 0 8px}
+
+/* ===== CTA ===== */
+.cta{
+display:flex;align-items:center;justify-content:center;gap:8px;
+background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;
+text-align:center;padding:16px;border-radius:14px;text-decoration:none;
+font-weight:800;margin:24px 0;font-size:1em;
+box-shadow:0 8px 24px rgba(34,197,94,.35);
+}
+.cta:active{transform:scale(.98)}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{
+position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);
+backdrop-filter:blur(14px);display:flex;justify-content:space-around;
+padding:10px 0 12px;box-shadow:0 -4px 20px rgba(15,23,42,.08);
+z-index:200;border-top:1px solid var(--border);
+}
+.nav-item{
+text-align:center;font-size:.66em;color:var(--muted);
+text-decoration:none;flex:1;font-weight:600;
+}
+.nav-item .nav-icon{font-size:1.5em;display:block;margin-bottom:2px}
+.nav-item.active{color:var(--primary)}
+.nav-item.active .nav-icon{transform:translateY(-2px);transition:transform .2s}
+
+/* ===== ADMIN PANEL ===== */
+.admin-overlay{
+position:fixed;inset:0;background:rgba(15,23,42,.75);backdrop-filter:blur(6px);
+z-index:999;display:none;align-items:center;justify-content:center;padding:16px;
+}
+.admin-overlay.show{display:flex}
+.admin-panel{
+background:#fff;border-radius:20px;width:100%;max-width:440px;
+max-height:88vh;overflow-y:auto;padding:22px;
+box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+.admin-panel h2{
+font-size:1.15em;font-weight:800;color:var(--dark);
+margin-bottom:4px;display:flex;align-items:center;gap:8px;
+}
+.admin-panel .sub{font-size:.82em;color:var(--muted);margin-bottom:18px}
+.admin-panel label{
+font-size:.82em;font-weight:700;color:var(--text);
+display:block;margin:12px 0 5px;
+}
+.admin-panel input,.admin-panel select{
+width:100%;padding:11px 14px;border:1.5px solid var(--border);
+border-radius:10px;font-size:.92em;outline:none;color:var(--text);
+font-family:inherit;background:#fff;transition:border .2s;
+}
+.admin-panel input:focus,.admin-panel select:focus{border-color:var(--primary)}
+.admin-panel input[type="password"]{letter-spacing:2px}
+.admin-btns{display:flex;gap:10px;margin-top:20px}
+.admin-btns button{
+flex:1;padding:13px;border-radius:10px;border:none;
+font-size:.9em;font-weight:700;cursor:pointer;font-family:inherit;
+transition:transform .15s;
+}
+.admin-btns button:active{transform:scale(.96)}
+.btn-save{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff}
+.btn-cancel{background:#f1f5f9;color:var(--text)}
+.item-row{
+display:flex;justify-content:space-between;align-items:center;
+padding:10px 12px;background:#f8fafc;border-radius:10px;
+margin-bottom:8px;font-size:.85em;border:1px solid var(--border);
+}
+.item-row .info{flex:1;min-width:0}
+.item-row .info strong{color:var(--dark);display:block;font-size:.95em}
+.item-row .info span{color:var(--muted);font-size:.85em}
+.item-row .actions{display:flex;gap:6px;flex-shrink:0}
+.item-row .actions button{
+width:32px;height:32px;border-radius:8px;border:none;
+font-size:.9em;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.btn-edit{background:#dbeafe;color:#1d4ed8}
+.btn-del{background:#fee2e2;color:#dc2626}
+.admin-list-title{
+font-size:.85em;font-weight:800;color:var(--dark);
+margin:18px 0 10px;display:flex;justify-content:space-between;align-items:center;
+}
+.admin-list-title .count{
+background:var(--primary);color:#fff;font-size:.75em;
+padding:2px 10px;border-radius:20px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+text-align:center;padding:30px 20px 24px;color:var(--muted);
+font-size:.8em;border-top:1px solid var(--border);margin-top:20px;
+}
+footer .admin-btn{
+display:inline-flex;align-items:center;gap:6px;
+margin-top:12px;padding:8px 16px;background:#f1f5f9;
+border:1px solid var(--border);border-radius:20px;
+font-size:.85em;font-weight:700;color:var(--muted);
+cursor:pointer;font-family:inherit;
+}
+footer .admin-btn:active{background:#e2e8f0}
+
+/* ===== TOAST ===== */
+.toast{
+position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(100px);
+background:var(--dark);color:#fff;padding:12px 22px;border-radius:30px;
+font-size:.85em;font-weight:600;z-index:9999;opacity:0;
+transition:all .3s;box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+<div class="logo">🌍</div>
+<h1>Taveta Connect</h1>
+<p>Services, Fundis & Boda — Taveta Constituency</p>
+<div class="badge-live"><span class="dot-live"></span> Live Now</div>
+</div>
+<div class="search-wrap">
+<div class="search-box">
+<input type="text" id="search" placeholder="Search business, fundi, boda...">
+<button onclick="doSearch()">🔍</button>
+</div>
+</div>
+</header>
+
+<div class="tabs" id="tabs">
+<div class="tab active" onclick="filterCat('all',this)">All</div>
+<div class="tab" onclick="filterCat('salon',this)">💇 Salon</div>
+<div class="tab" onclick="filterCat('kinyozi',this)">✂️ Barber</div>
+<div class="tab" onclick="filterCat('hotel',this)">🏨 Hotel</div>
+<div class="tab" onclick="filterCat('club',this)">🎵 Club</div>
+<div class="tab" onclick="filterCat('bar',this)">🍺 Bar</div>
+<div class="tab" onclick="filterCat('restaurant',this)">🍽️ Restaurant</div>
+<div class="tab" onclick="filterCat('fundi',this)">🔧 Fundi</div>
+<div class="tab" onclick="filterCat('boda',this)">🛵 Boda</div>
+<div class="tab" onclick="filterCat('stage',this)">📍 Stage</div>
+</div>
+
+<div class="container">
+<div class="stats">
+<div class="stat"><div class="num" id="statTotal">0</div><div class="label">Businesses</div></div>
+<div class="stat"><div class="num">10</div><div class="label">Categories</div></div>
+<div class="stat"><div class="num">24/7</div><div class="label">Service</div></div>
+</div>
+
+<div id="listings"></div>
+
+<a href="https://wa.me/254758141538?text=Hello%20Taveta%20Connect,%20I%20want%20to%20add%20my%20business" class="cta">
+➕ Add Your Business
+</a>
+</div>
+
+<div class="bottom-nav">
+<a href="#" class="nav-item active"><span class="nav-icon">🏠</span>Home</a>
+<a href="#tabs" class="nav-item"><span class="nav-icon">🔍</span>Search</a>
+<a href="https://wa.me/254758141538" class="nav-item"><span class="nav-icon">💬</span>Contact</a>
+</div>
+
+<footer>
+© 2026 Taveta Connect. All rights reserved.<br>
+Taveta Constituency, Taita Taveta County<br>
+<button class="admin-btn" onclick="openAdmin()">⚙️ Admin Panel</button>
+</footer>
+
+<!-- ADMIN LOGIN -->
+<div class="admin-overlay" id="loginOverlay">
+<div class="admin-panel">
+<h2>🔐 Admin Login</h2>
+<p class="sub">Enter password to manage listings</p>
+<label>Password</label>
+<input type="password" id="adminPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')loginAdmin()">
+<div class="admin-btns">
+<button class="btn-cancel" onclick="closeAdmin()">Cancel</button>
+<button class="btn-save" onclick="loginAdmin()">Login</button>
+</div>
+</div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="admin-overlay" id="dashOverlay">
+<div class="admin-panel">
+<h2>⚙️ Admin Dashboard</h2>
+<p class="sub">Add, edit or delete listings</p>
+
+<label>Name</label>
+<input type="text" id="fName" placeholder="e.g. KiM Kinyozi">
+<label>Category</label>
+<select id="fCat">
+<option value="salon">💇 Salon</option>
+<option value="kinyozi">✂️ Barber (Kinyozi)</option>
+<option value="hotel">🏨 Hotel</option>
+<option value="club">🎵 Club</option>
+<option value="bar">🍺 Bar</option>
+<option value="restaurant">🍽️ Restaurant</option>
+<option value="fundi">🔧 Fundi</option>
+<option value="boda">🛵 Boda Rider</option>
+<option value="stage">📍 Stage</option>
+</select>
+<label>Location / Stage</label>
+<input type="text" id="fLoc" placeholder="e.g. Majengo, Taveta Town">
+<label>Phone (254...) </label>
+<input type="tel" id="fPhone" placeholder="254758141538">
+<label>Rating (1-5)</label>
+<input type="number" id="fRating" min="1" max="5" step="0.1" value="4.5" placeholder="4.5">
+<label>Status</label>
+<select id="fStatus">
+<option value="open">Open</option>
+<option value="closed">Closed</option>
+</select>
+
+<div class="admin-btns">
+<button class="btn-cancel" onclick="closeDash()">Close</button>
+<button class="btn-save" onclick="saveItem()">💾 Save</button>
+</div>
+
+<div class="admin-list-title">
+<span>All Listings</span>
+<span class="count" id="listCount">0</span>
+</div>
+<div id="adminList"></div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DATA ================= */
+const DEFAULT_DATA = [
+{id:1,name:"KiM Kinyozi",cat:"kinyozi",loc:"Majengo, Taveta Town",phone:"254758141538",rating:4.9,status:"open",icon:"✂️"},
+{id:2,name:"Japan Hotel",cat:"hotel",loc:"Town Center, Taveta",phone:"254758141538",rating:4.7,status:"open",icon:"🏨"},
+{id:3,name:"Chemsha Village",cat:"club",loc:"Near Bus Park, Taveta",phone:"254758141538",rating:4.6,status:"closed",icon:"🎵"},
+{id:4,name:"Mawimbi Jiko",cat:"restaurant",loc:"Market Street, Taveta",phone:"254758141538",rating:4.8,status:"open",icon:"🍽️"},
+{id:5,name:"Aunty Ruth Hotel",cat:"hotel",loc:"Hospital Road, Taveta",phone:"254758141538",rating:4.5,status:"open",icon:"🏨"},
+{id:6,name:"Naekana Stage",cat:"stage",loc:"Naekana, Taveta",phone:"254758141538",rating:4.5,status:"open",icon:"🚌"},
+{id:7,name:"2NK Stage",cat:"stage",loc:"Town Center, Taveta",phone:"254758141538",rating:4.4,status:"open",icon:"🚌"},
+{id:8,name:"Boda Boda Stage",cat:"stage",loc:"Sokoni, Taveta",phone:"254758141538",rating:4.6,status:"open",icon:"🛵"},
+{id:9,name:"John Mwangi",cat:"boda",loc:"Naekana Stage",phone:"254758141538",rating:4.9,status:"open",icon:"🛵"},
+{id:10,name:"Peter Kimani",cat:"boda",loc:"2NK Stage",phone:"254758141538",rating:4.8,status:"open",icon:"🏍️"},
+{id:11,name:"Ali Hassan",cat:"boda",loc:"Boda Boda Stage, Sokoni",phone:"254758141538",rating:4.7,status:"open",icon:"🛵"},
+{id:12,name:"Juma",cat:"fundi",loc:"Majengo, Taveta — Umeme",phone:"254758141538",rating:4.9,status:"open",icon:"🔧"},
+{id:13,name:"Rashid",cat:"fundi",loc:"Sokoni, Taveta — Mjengo",phone:"254758141538",rating:4.8,status:"open",icon:"🧱"},
+{id:14,name:"Samuel",cat:"fundi",loc:"Hospital Road — Tiles",phone:"254758141538",rating:4.9,status:"open",icon:"🧱"},
+{id:15,name:"Grace",cat:"fundi",loc:"Market Area — Chef / Cook",phone:"254758141538",rating:4.7,status:"open",icon:"👨‍🍳"},
+{id:16,name:"Blessed Hands Salon",cat:"salon",loc:"Market Street, Taveta",phone:"254758141538",rating:4.6,status:"open",icon:"💇"},
+{id:17,name:"Fresh Cut Kinyozi",cat:"kinyozi",loc:"Majengo, Taveta",phone:"254758141538",rating:4.7,status:"open",icon:"✂️"}
+];
+
+const CAT_NAMES = {salon:"Salon",kinyozi:"Barber",hotel:"Hotel",club:"Club",bar:"Bar",restaurant:"Restaurant",fundi:"Fundi",boda:"Boda Rider",stage:"Stage"};
+const ADMIN_PASS = "taveta2026";
+
+let data = loadData();
+let editId = null;
+
+/* ================= STORAGE ================= */
+function loadData(){
+try{
+const saved = localStorage.getItem("taveta_connect_data");
+if(saved) return JSON.parse(saved);
+}catch(e){}
+localStorage.setItem("taveta_connect_data",JSON.stringify(DEFAULT_DATA));
+return [...DEFAULT_DATA];
+}
+function saveData(){
+localStorage.setItem("taveta_connect_data",JSON.stringify(data));
+}
+
+/* ================= RENDER ================= */
+function render(filterCat="all",query=""){
+const el = document.getElementById("listings");
+const q = query.toLowerCase();
+let filtered = data.filter(d=>{
+const matchCat = filterCat==="all" || d.cat===filterCat;
+const matchQ = !q || d.name.toLowerCase().includes(q) || d.loc.toLowerCase().includes(q) || CAT_NAMES[d.cat].toLowerCase().includes(q);
+return matchCat && matchQ;
+});
+
+document.getElementById("statTotal").textContent = data.length;
+
+if(filtered.length===0){
+el.innerHTML = '<div style="text-align:center;padding:40px 20px;color:#94a3b8"><div style="font-size:3em;margin-bottom:10px">🔍</div><p>No results found</p></div>';
+return;
+}
+
+const groups = {};
+filtered.forEach(d=>{ if(!groups[d.cat]) groups[d.cat]=[]; groups[d.cat].push(d); });
+
+let html = "";
+Object.keys(groups).forEach(cat=>{
+html += `<div class="section-title"><span class="bar"></span>${CAT_NAMES[cat]}s</div>`;
+groups[cat].forEach(d=>{
+const isBoda = d.cat==="boda";
+const phoneClean = d.phone.replace(/\D/g,"");
+const waMsg = encodeURIComponent(`Hello ${d.name}, I found you on Taveta Connect.`);
+if(isBoda){
+html += `
+<div class="boda-card" data-cat="${d.cat}">
+<div class="boda-img">${d.icon}</div>
+<div class="boda-info">
+<h3>${d.name}</h3>
+<div class="stage">📍 ${d.loc}</div>
+<div class="meta">
+<span class="rating">⭐ ${d.rating}</span>
+<span class="status ${d.status}">${d.status==="open"?"Available":"Offline"}</span>
+<span class="tag">Boda</span>
+</div>
+<div class="btns">
+<a href="tel:+${phoneClean}" class="btn-sm btn-call">📞 Call</a>
+<a href="https://wa.me/${phoneClean}?text=${waMsg}" class="btn-sm btn-wa">💬 WhatsApp</a>
+</div>
+</div>
+</div>`;
+} else {
+html += `
+<div class="card" data-cat="${d.cat}">
+<div class="avatar">${d.icon}</div>
+<div class="card-body">
+<h3>${d.name}</h3>
+<div class="loc">📍 ${d.loc}</div>
+<div class="meta">
+<span class="rating">⭐ ${d.rating}</span>
+<span class="status ${d.status}">${d.status==="open"?"Open":"Closed"}</span>
+<span class="tag">${CAT_NAMES[d.cat]}</span>
+</div>
+<div class="btns">
+<a href="tel:+${phoneClean}" class="btn-sm btn-call">📞 Call</a>
+<a href="https://wa.me/${phoneClean}?text=${waMsg}" class="btn-sm btn-wa">💬 WhatsApp</a>
+</div>
+</div>
+</div>`;
+}
+});
+});
+el.innerHTML = html;
+}
+
+/* ================= FILTER & SEARCH ================= */
+let currentCat = "all";
+function filterCat(cat,el){
+currentCat = cat;
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+el.classList.add("active");
+render(cat,document.getElementById("search").value);
+}
+function doSearch(){
+render(currentCat,document.getElementById("search").value);
+}
+document.getElementById("search").addEventListener("keyup",e=>{ if(e.key==="Enter") doSearch(); });
+
+/* ================= ADMIN ================= */
+function openAdmin(){
+document.getElementById("loginOverlay").classList.add("show");
+setTimeout(()=>document.getElementById("adminPass").focus(),100);
+}
+function closeAdmin(){
+document.getElementById("loginOverlay").classList.remove("show");
+document.getElementById("adminPass").value = "";
+}
+function loginAdmin(){
+const pass = document.getElementById("adminPass").value;
+if(pass === ADMIN_PASS){
+closeAdmin();
+openDash();
+} else {
+showToast("❌ Wrong password");
+}
+}
+function openDash(){
+document.getElementById("dashOverlay").classList.add("show");
+renderAdminList();
+}
+function closeDash(){
+document.getElementById("dashOverlay").classList.remove("show");
+clearForm();
+}
+function clearForm(){
+editId = null;
+["fName","fLoc","fPhone"].forEach(id=>document.getElementById(id).value="");
+document.getElementById("fCat").value = "salon";
+document.getElementById("fRating").value = "4.5";
+document.getElementById("fStatus").value = "open";
+}
+function saveItem(){
+const name = document.getElementById("fName").value.trim();
+const cat = document.getElementById("fCat").value;
+const loc = document.getElementById("fLoc").value.trim();
+const phone = document.getElementById("fPhone").value.trim();
+const rating = parseFloat(document.getElementById("fRating").value) || 4.5;
+const status = document.getElementById("fStatus").value;
+
+if(!name || !loc || !phone){
+showToast("⚠️ Fill name, location and phone");
+return;
+}
+const cleanPhone = phone.replace(/\D/g,"");
+const icons = {salon:"💇",kinyozi:"✂️",hotel:"🏨",club:"🎵",bar:"🍺",restaurant:"🍽️",fundi:"🔧",boda:"🛵",stage:"📍"};
+
+if(editId){
+const item = data.find(d=>d.id===editId);
+Object.assign(item,{name,cat,loc,phone:cleanPhone,rating,status,icon:icons[cat]});
+showToast("✅ Updated successfully");
+} else {
+data.push({id:Date.now(),name,cat,loc,phone:cleanPhone,rating,status,icon:icons[cat]});
+showToast("✅ Added successfully");
+}
+saveData();
+clearForm();
+renderAdminList();
+render(currentCat,document.getElementById("search").value);
+}
+function editItem(id){
+const d = data.find(x=>x.id===id);
+if(!d) return;
+editId = id;
+document.getElementById("fName").value = d.name;
+document.getElementById("fCat").value = d.cat;
+document.getElementById("fLoc").value = d.loc;
+document.getElementById("fPhone").value = d.phone;
+document.getElementById("fRating").value = d.rating;
+document.getElementById("fStatus").value = d.status;
+document.getElementById("dashOverlay").scrollTop = 0;
+showToast("✏️ Editing " + d.name);
+}
+function deleteItem(id){
+if(!confirm("Delete this listing?")) return;
+data = data.filter(d=>d.id!==id);
+saveData();
+renderAdminList();
+render(currentCat,document.getElementById("search").value);
+showToast("🗑️ Deleted");
+}
+function renderAdminList(){
+const el = document.getElementById("adminList");
+document.getElementById("listCount").textContent = data.length;
+if(data.length===0){
+el.innerHTML = '<p style="color:#94a3b8;font-size:.85em;text-align:center;padding:20px">No listings yet</p>';
+return;
+}
+el.innerHTML = data.map(d=>`
+<div class="item-row">
+<div class="info">
+<strong>${d.icon} ${d.name}</strong>
+<span>${CAT_NAMES[d.cat]} • ${d.loc}</span>
+</div>
+<div class="actions">
+<button class="btn-edit" onclick="editItem(${d.id})">✏️</button>
+<button class="btn-del" onclick="deleteItem(${d.id})">🗑️</button>
+</div>
+</div>
+`).join("");
+}
+
+/* ================= TOAST ================= */
+let toastTimer;
+function showToast(msg){
+const t = document.getElementById("toast");
+t.textContent = msg;
+t.classList.add("show");
+clearTimeout(toastTimer);
+toastTimer = setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+/* ================= INIT ================= */
+render();
+</script>
+</body>
+  </html>
